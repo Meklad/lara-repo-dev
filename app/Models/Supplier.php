@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Supplier extends Model
 {
@@ -22,4 +24,14 @@ class Supplier extends Model
         "email",
         "phone"
     ];
+
+    /**
+     * Get the company that own this supplier.
+     *
+     * @return BelongsTo
+     */
+    public function company() : BelongsTo
+    {
+        return $this->belongsTo(Company::class, "company_id", "id");
+    }
 }
